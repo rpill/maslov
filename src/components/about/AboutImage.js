@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components'
-import posed from "react-pose";
+import posed from "react-pose"
 import { Box } from 'rebass'
 import { space } from '../../styles/Theme'
 

@@ -29,6 +29,12 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-layout`,
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        ssr: false
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

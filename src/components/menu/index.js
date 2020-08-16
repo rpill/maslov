@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, navigate } from 'gatsby';
 import styled from 'styled-components'
+import posed from "react-pose"
 import { Flex, Box } from 'rebass'
 import { space } from '../../styles/Theme'
 
@@ -32,7 +33,24 @@ const MENU_ITEMS = [
     }
 ];
 
-const MenuStyle = styled.div`
+const MenuPoses = posed.div({
+    hidden: {
+        opacity: 0,
+        transition: {
+            duration: 1000,
+            ease: [.14, .99, .43, .99]
+        }
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            duration: 1000,
+            ease: [.14, .99, .43, .99],
+        }
+    }
+})
+
+const MenuStyle = styled(MenuPoses)`
     position: absolute;
     height: 100%;
     width: 100%;
