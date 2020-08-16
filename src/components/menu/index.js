@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Link, navigate} from 'gatsby'
+import {useLocation} from '@reach/router'
 import styled from 'styled-components'
 import posed from "react-pose"
 import {Flex, Box} from 'rebass'
@@ -60,14 +61,14 @@ const MenuPoses = posed.div({
     hidden: {
         opacity: 0,
         transition: {
-            duration: 1000,
+            duration: 350,
             ease: [.14, .99, .43, .99]
         }
     },
     visible: {
         opacity: 1,
         transition: {
-            duration: 1000,
+            duration: 350,
             ease: [.14, .99, .43, .99],
         }
     }
@@ -75,6 +76,8 @@ const MenuPoses = posed.div({
 
 const MenuStyle = styled(MenuPoses)`
     position: absolute;
+    display: flex;
+    align-items: center;
     height: 100%;
     width: 100%;
     top: 0;
@@ -241,10 +244,14 @@ const HoverListStyle = styled.div`
 `
 
 const Menu = () => {
+    const location = useLocation();
     const [isMobile, setIsMobile] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
     const [isNavigate, setIsNavigate] = useState(null);
+    const [visible, setVisible] = useState(false);
+    let currentVideos = null;
     let refsVideos = [];
+    const pathname = location.pathname;
 
     const handleResize = debounce(() => {
         setIsMobile(window.innerWidth < 1024);
@@ -258,6 +265,10 @@ const Menu = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    useEffect(() => {
+        if(pathname === '/') setVisible(true);
+    }, [pathname]);
 
     const handleMouseEnter = (e, index) => {
         if (isNavigate) return;
@@ -283,6 +294,7 @@ const Menu = () => {
         playVideos(refsVideos[index]);
 
         if (isMobile) {
+            currentVideos = refsVideos[index];
             delay(1000).then(() => {
                 navigate(url);
                 delay(1000).then(() => {
@@ -290,7 +302,9 @@ const Menu = () => {
                     setActiveIndex('');
 
                     delay(300).then(() => {
-                        // stopVideos(refsVideos);
+                        stopVideos(currentVideos);
+                        setVisible(false);
+                        console.log(visible);
                     });
                 });
             });
@@ -317,7 +331,7 @@ const Menu = () => {
     };
 
     return (
-        <Flex as={MenuStyle} alignItems="center" className={isNavigate ? 'navigate' : ''}>
+        <MenuStyle className={isNavigate ? 'navigate' : ''} initialPose={'hidden'} pose={visible ? 'visible' : 'hidden'}>
             <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center" sx={{zIndex: 2}}>
                 <Box as={MenuListStyle}>
                     {MENU_ITEMS.map((link, index) => (
@@ -359,7 +373,7 @@ const Menu = () => {
                     </Box>
                 ))}
             </Box>
-        </Flex>
+        </MenuStyle>
     )
 }
 
