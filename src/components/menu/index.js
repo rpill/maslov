@@ -304,7 +304,6 @@ const Menu = () => {
                     delay(300).then(() => {
                         stopVideos(currentVideos);
                         setVisible(false);
-                        console.log(visible);
                     });
                 });
             });
@@ -313,6 +312,7 @@ const Menu = () => {
             delay(1000).then(() => {
                 setIsNavigate(false);
                 setActiveIndex('');
+                setVisible(false);
             });
         }
     };

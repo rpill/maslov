@@ -5,6 +5,7 @@ import {useStaticQuery, graphql} from 'gatsby'
 
 import {defaultContextValue, reducer, LayoutContext} from './layoutContext'
 
+import Loader from '../components/loader'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import RotateDevice from '../components/rotate-device'
@@ -35,6 +36,7 @@ const Layout = ({children}) => {
             <GlobalStyle/>
             <ThemeProvider theme={Theme}>
                 <RotateDevice/>
+                <Loader/>
                 <Menu/>
                 <Wrapper>
                     <Header/>
