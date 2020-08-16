@@ -1,13 +1,11 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react'
 
-import Layout from "../layouts/"
-import SEO from "../components/seo"
+import SEO from '../components/seo'
 
 const NotFoundPage = () => (
-  <Layout>
-    <SEO title="Home" />
-  </Layout>
+  <>
+    <SEO title="404" />
+  </>
 )
 
 export default NotFoundPage

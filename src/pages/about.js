@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useCallback} from "react"
+import React, {useContext, useEffect} from "react"
 
 import SEO from "../components/seo"
 
@@ -6,7 +6,7 @@ import About from "../components/about"
 import {LayoutContext} from "../layouts/layoutContext";
 
 const AboutPage = () => {
-    const {layoutState, dispatch} = useContext(LayoutContext);
+    const {dispatch} = useContext(LayoutContext);
 
     useEffect(() => {
         dispatch({

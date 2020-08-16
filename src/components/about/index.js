@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Box } from 'rebass'
+import { Flex } from 'rebass'
 import { space } from '../../styles/Theme'
 
 import backgroundImage from '../../assets/images/about/background.png';

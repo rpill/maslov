@@ -7,7 +7,7 @@ import {LayoutContext} from "../layouts/layoutContext";
 
 export default function Works(result) {
     const {works, title, slug} = result.data.props;
-    const {layoutState, dispatch} = useContext(LayoutContext);
+    const {dispatch} = useContext(LayoutContext);
 
     useEffect(() => {
         dispatch({
