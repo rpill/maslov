@@ -1,0 +1,32 @@
+// transition states
+
+export const TRANSITION_STATES = {
+    intro: 'intro',
+    started: 'started',
+    leaving: 'leaving',
+};
+
+
+// base value for all transition durations or delays
+
+export const TRANSITION_BASE = 650;
+
+// transition duration base, used only for component handling route changes
+
+export const TRANSITION_DURATION = TRANSITION_BASE;
+
+// on exit
+
+export const TRANSITION_OUT_DELAY = TRANSITION_DURATION * 0.5;
+export const TRANSITION_OUT_DURATION = TRANSITION_DURATION;
+
+// on entering
+
+export const TRANSITION_IN_DELAY = TRANSITION_BASE / 4;
+export const TRANSITION_IN_DURATION = TRANSITION_BASE;
+
+// delay for intro
+
+export const TRANSITION_INTRO_DURATION = TRANSITION_DURATION * 2.5;
+export const TRANSITION_INTRO_DELAY = TRANSITION_DURATION * 3;
+export const INTRO_REVEALS_DELAY = TRANSITION_INTRO_DELAY * 1.15;
