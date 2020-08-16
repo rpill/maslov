@@ -42,6 +42,7 @@ const BackStyle = styled(BackPoses)`
   white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: .04rem;
+  opacity: 0;
   transition: all .3s;
   &:hover {
     background-color: ${props => props.theme.colors.fuscousGrey};
@@ -66,7 +67,7 @@ const Back = () => {
     }, [pathname]);
 
     return (
-        <BackStyle to="/" pose={visible ? 'visible' : 'hidden'}>
+        <BackStyle to="/" initialPose={'hidden'} pose={visible ? 'visible' : 'hidden'}>
             <Box as={BackIconStyle} sx={{mr: '8px'}}>
                 <BackIcon/>
             </Box>

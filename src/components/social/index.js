@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import posed from 'react-pose'
 import { useLocation } from '@reach/router'
-import {Flex, Box} from 'rebass'
+import {Box} from 'rebass'
+
+import AnimateText from './AnimateText'
 
 const SocialListPoses = posed.ul({
     hidden: {
@@ -129,7 +131,7 @@ const SocialItemStyle = styled(SocialItemPoses)`
 
 const SocialLinkStyle = styled.a`
     color: ${props => props.theme.colors.white};
-    font-size: .875rem;
+    font-size: ${props => props.theme.fontSizes[1]}px;
     text-transform: uppercase;
     letter-spacing: .04rem;
     @media (max-width: ${props => props.theme.breakpoints[2]}px) {
@@ -165,7 +167,7 @@ const Social = ({list}) => {
                 {list.map((item, index) => (
                     <SocialItemStyle key={index}>
                         <SocialLinkStyle href={item.url} target="_blank" rel="noopener noreferrer">
-                            {item.name}
+                            <AnimateText>{item.name}</AnimateText>
                         </SocialLinkStyle>
                     </SocialItemStyle>
                 ))}
