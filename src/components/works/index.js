@@ -2,13 +2,32 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import posed from 'react-pose'
 import { useLocation } from '@reach/router'
-import {Flex, Box} from 'rebass'
+import {Flex} from 'rebass'
 import Slider from "./Slider";
 
+const WorksPoses = posed.div({
+    hidden: {
+        y: 30,
+        opacity: 0,
+        transition: {
+            duration: 1000,
+            ease: [.14, .99, .43, .99]
+        }
+    },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 1000,
+            ease: [.14, .99, .43, .99],
+        }
+    }
+})
 
-
-const WorksStyle = styled.div`
+const WorksStyle = styled(WorksPoses)`
   position: absolute;
+  display: flex;
+  align-items: center;
   z-index: 5;
   height: 100%;
   width: 100%;
@@ -19,17 +38,17 @@ const WorksStyle = styled.div`
 
 const Works = ({works}) => {
     const location = useLocation();
-    const [ visible, setVisible ] = useState(false);
+    const [ visible, setVisible ] = useState(true);
     const pathname = location.pathname;
 
     useEffect(() => {
-        setVisible(false)
+        // setVisible(false)
     }, [pathname]);
 
     return (
-        <Flex as={WorksStyle} alignItems="center">
+        <WorksStyle initialPose={'hidden'} pose={visible ? 'visible' : 'hidden'}>
             <Slider images={works}/>
-        </Flex>
+        </WorksStyle>
     )
 };
 

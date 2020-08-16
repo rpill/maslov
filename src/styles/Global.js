@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-import Theme, { rebootCSS, colors } from './Theme'
+import Theme, { rebootCSS, colors, fonts } from './Theme'
 
 const GlobalStyle = createGlobalStyle`
     /* normalize css */
@@ -36,6 +36,11 @@ const GlobalStyle = createGlobalStyle`
             color: inherit;
             text-decoration: none;
         }
+    }
+    p {
+        margin: 0;
+        font-family: ${fonts.serif};
+        letter-spacing: .1rem;
     }
 `
 export default GlobalStyle

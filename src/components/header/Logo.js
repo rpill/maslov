@@ -89,7 +89,7 @@ const LogoTitleStyle = styled.div`
   text-transform: uppercase;
   letter-spacing: .04rem;
   white-space: nowrap;
-  transition: all .3s;
+  //transition: all .3s;
   @media (max-width: ${props => props.theme.breakpoints[2]}px) {
     transform: translateX(3px) translateY(2px) rotate(-13deg);
     font-size: ${props => props.theme.fontSizes[0]}px;

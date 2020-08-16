@@ -107,6 +107,7 @@ const SocialItemStyle = styled(SocialItemPoses)`
     }
     @media (min-width: ${props => props.theme.breakpoints[2]+1}px) {
       opacity: 1!important;
+      transform: none!important;
     }
     &:last-child {
       &:after {

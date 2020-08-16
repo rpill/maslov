@@ -9,31 +9,26 @@ const MENU_ITEMS = [
         id: 'all-projects',
         name: 'all projects',
         url: '/all-projects',
-        color: 'white',
     },
     {
         id: 'typography',
         name: 'typography',
         url: '/typography',
-        color: 'red'
     },
     {
         id: 'logo-design',
         name: 'logo-design',
         url: '/logo-design',
-        color: 'green'
     },
     {
         id: 'illustrations',
         name: 'illustrations',
         url: '/illustrations',
-        color: 'blue'
     },
     {
         id: 'about',
         name: 'about',
         url: '/about',
-        color: 'yellow'
     }
 ];
 
@@ -77,6 +72,31 @@ const MenuLinkStyle = styled(props => <Link {...props} />)`
     @media (max-width: 374px) {
         letter-spacing: 0;
     }
+    &.all-projects {
+      &:hover, &.active {
+        color: ${props => props.theme.colors.white};
+      }
+    }
+    &.typography {
+      &:hover, &.active {
+        color: ${props => props.theme.colors.red};
+      }
+    }
+    &.logo-design {
+      &:hover, &.active {
+        color: ${props => props.theme.colors.green};
+      }
+    }
+    &.illustrations {
+      &:hover, &.active {
+        color: ${props => props.theme.colors.blue};
+      }
+    }
+    &.about {
+      &:hover, &.active {
+        color: ${props => props.theme.colors.yellow};
+      }
+    }
 `
 
 const Menu = () => {
@@ -86,7 +106,7 @@ const Menu = () => {
                 <Box as={MenuListStyle}>
                     {MENU_ITEMS.map((link, index) => (
                         <Box as={MenuItemStyle} key={index}>
-                            <MenuLinkStyle to={link.url}>
+                            <MenuLinkStyle to={link.url} className={link.id}>
                                 {link.name}
                             </MenuLinkStyle>
                         </Box>
