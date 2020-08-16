@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import posed from 'react-pose'
-import { useLocation } from '@reach/router'
-import {Flex} from 'rebass'
 import Slider from "./Slider";
 
 const WorksPoses = posed.div({
@@ -37,13 +35,11 @@ const WorksStyle = styled(WorksPoses)`
 `
 
 const Works = ({works}) => {
-    const location = useLocation();
-    const [ visible, setVisible ] = useState(true);
-    const pathname = location.pathname;
+    const [ visible, setVisible ] = useState(false);
 
     useEffect(() => {
-        // setVisible(false)
-    }, [pathname]);
+        setVisible(true)
+    });
 
     return (
         <WorksStyle initialPose={'hidden'} pose={visible ? 'visible' : 'hidden'}>

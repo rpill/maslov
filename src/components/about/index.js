@@ -6,6 +6,7 @@ import { space } from '../../styles/Theme'
 import backgroundImage from '../../assets/images/about/background.png';
 import backgroundMobileImage from '../../assets/images/about/background-mobile.png';
 import AboutContent from "./AboutContent";
+import AboutImage from "./AboutImage";
 
 const AboutStyle = styled.div`
   position: relative;
@@ -47,6 +48,7 @@ const About = () => {
     return (
         <Flex as={AboutStyle}>
             <AboutContent/>
+            <AboutImage/>
         </Flex>
     )
   }
