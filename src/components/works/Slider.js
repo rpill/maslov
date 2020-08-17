@@ -68,15 +68,15 @@ const ButtonStyle = styled.div`
   justify-content: center;
   z-index: 10;
   top: 50%;
-  margin-top: -31px;
-  width: 62px;
-  height: 62px;
+  margin-top: -31px!important;
+  width: 62px!important;
+  height: 62px!important;
   background-color: ${props => props.theme.colors.black};
   border-radius: 50%;
   cursor: pointer;
   transition: all .3s;
   @media (max-width: ${props => props.theme.breakpoints[2]}px) {
-    display: none;
+    display: none!important;
   }
   &:hover {
     transform: translateY(-8px);
