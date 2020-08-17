@@ -116,9 +116,9 @@ const AboutImage = () => {
     const [imgLoaded, setImgLoaded] = useState(false);
     const canvasRef = useRef(null);
 
-    useEffect(() => {
-        setVisible(true)
-    });
+    // useEffect(() => {
+    //     setVisible(true)
+    // });
 
     useEffect(() => {
         const images = ['../../assets/images/about/man.png'];
@@ -133,7 +133,7 @@ const AboutImage = () => {
 
     useEffect(() => {
         if (loadedImages && imgLoaded && canvasRef.current) {
-
+            setVisible(true);
             const getImage = src => {
                 return loadedImages.find(img => img.src.indexOf(src) > -1);
             };

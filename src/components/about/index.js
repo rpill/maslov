@@ -11,7 +11,7 @@ import AboutImage from "./AboutImage";
 const AboutStyle = styled.div`
   position: relative;
   z-index: 2;
-  background: ${props => props.theme.colors.red} url(${backgroundImage}) center no-repeat;
+  background: #ff2530 url(${backgroundImage}) center no-repeat;
   background-size: cover;
   padding: ${space[1] * 2}px ${space[1]}px;
   min-height: 100vh;
@@ -25,7 +25,8 @@ const AboutStyle = styled.div`
     justify-content: center;
     overflow: hidden;
     padding: 75px ${space[1]}px;
-    background-image: url(${backgroundMobileImage});
+    background: #ff2530 url(${backgroundMobileImage}) center no-repeat;
+    background-size: cover;
   }
   &:after {
     content: '';
