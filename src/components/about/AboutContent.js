@@ -33,7 +33,7 @@ const AboutContentStyle = styled.div`
   z-index: 2;
   align-self: center;
   max-width: 65%;
-  @media (max-width: ${props => props.theme.fontSizes[3]}px) {
+  @media (max-width: ${props => props.theme.breakpoints[3]}px) {
     max-width: 55%;
   }
   @media (max-width: 1024px) {
