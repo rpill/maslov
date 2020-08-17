@@ -10,6 +10,12 @@ import LogoIcon from '../../svg/LogoIcon';
 import {useLocation} from "@reach/router";
 
 const LogoStyle = styled(props => <Link {...props} />)`
+  &.all-projects {
+    color: ${props => props.theme.colors.white};
+    svg {
+      fill: ${props => props.theme.colors.white};
+    }
+  }
   &.home {
     color: ${props => props.theme.colors.white};
     svg {
