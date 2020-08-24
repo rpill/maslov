@@ -121,14 +121,19 @@ const AboutImage = () => {
     // });
 
     useEffect(() => {
+        let isMounted = false;
         const images = ['../../assets/images/about/man.png'];
 
         loadImages(...images).then(imgs => {
             loadedImages = imgs;
-            setImgLoaded(true);
+            if(!isMounted) setImgLoaded(true);
         }).catch(e => {
             console.log(e);
         });
+
+        return () => {
+            isMounted = true;
+        };
     }, []);
 
     useEffect(() => {

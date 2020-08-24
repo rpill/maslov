@@ -249,6 +249,7 @@ const Menu = () => {
     const [activeIndex, setActiveIndex] = useState(null);
     const [isNavigate, setIsNavigate] = useState(null);
     const [visible, setVisible] = useState(false);
+    const [timeId, setTimeId] = useState(null);
     let currentVideos = null;
     let refsVideos = [];
     const pathname = location.pathname;
@@ -267,7 +268,12 @@ const Menu = () => {
     }, []);
 
     useEffect(() => {
-        if(pathname === '/') setVisible(true);
+        if(pathname === '/') {
+            clearTimeout(timeId);
+            setIsNavigate(false);
+            setActiveIndex('');
+            setVisible(true);
+        };
     }, [pathname]);
 
     const handleMouseEnter = (e, index) => {
@@ -297,23 +303,25 @@ const Menu = () => {
             currentVideos = refsVideos[index];
             delay(1000).then(() => {
                 navigate(url);
-                delay(1000).then(() => {
+                let id = setTimeout(function () {
                     setIsNavigate(false);
                     setActiveIndex('');
 
-                    delay(300).then(() => {
+                    setTimeout(function () {
                         stopVideos(currentVideos);
                         setVisible(false);
-                    });
-                });
+                    }, 300);
+                }, 1000);
+                setTimeId(id);
             });
         } else {
             navigate(url);
-            delay(1000).then(() => {
+            let id = setTimeout(function () {
                 setIsNavigate(false);
                 setActiveIndex('');
                 setVisible(false);
-            });
+            }, 1000);
+            setTimeId(id);
         }
     };
 
@@ -331,7 +339,7 @@ const Menu = () => {
     };
 
     return (
-        <MenuStyle className={isNavigate ? 'navigate' : ''} initialPose={'hidden'} pose={visible ? 'visible' : 'hidden'}>
+        <MenuStyle className={isNavigate ? 'navigate' : ''} initialPose={visible ? 'visible' : 'hidden'} pose={visible ? 'visible' : 'hidden'}>
             <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center" sx={{zIndex: 2}}>
                 <Box as={MenuListStyle}>
                     {MENU_ITEMS.map((link, index) => (

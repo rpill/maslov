@@ -122,11 +122,12 @@ const AboutContent = () => {
     });
 
     useEffect(() => {
+        let isMounted = false;
 
         const {innerHeight} = window;
         maxY = innerHeight / 2;
         setTimeout(() => {
-            setTransformY(maxY);
+            if(!isMounted) setTransformY(maxY);
         }, 50);
 
         handleResize();
@@ -139,6 +140,7 @@ const AboutContent = () => {
         window.addEventListener('resize', handleResize, {passive: true});
 
         return () => {
+            isMounted = true;
             cancelAnimation();
             window.removeEventListener('wheel', handleWheel);
             window.removeEventListener('touchstart', handleTouchStart);
