@@ -29,6 +29,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-layout`,
+    `gatsby-disable-404`,
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
