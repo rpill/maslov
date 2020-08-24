@@ -61,14 +61,14 @@ const MenuPoses = posed.div({
     hidden: {
         opacity: 0,
         transition: {
-            duration: 350,
+            duration: 1000,
             ease: [.14, .99, .43, .99]
         }
     },
     visible: {
         opacity: 1,
         transition: {
-            duration: 350,
+            duration: 1000,
             ease: [.14, .99, .43, .99],
         }
     }
@@ -82,7 +82,6 @@ const MenuStyle = styled(MenuPoses)`
     width: 100%;
     top: 0;
     left: 0;
-    transition: opacity 1s;
     &.navigate {
       pointer-events: none;
     }
@@ -272,10 +271,8 @@ const Menu = () => {
             clearTimeout(timeId);
             setIsNavigate(false);
             setActiveIndex('');
-            setTimeout(function () {
-                setVisible(true);
-            }, 400);
-        };
+            setVisible(true);
+        }
     }, [pathname]);
 
     const handleMouseEnter = (e, index) => {
@@ -308,10 +305,10 @@ const Menu = () => {
                 let id = setTimeout(function () {
                     setIsNavigate(false);
                     setActiveIndex('');
+                    setVisible(false);
 
                     setTimeout(function () {
                         stopVideos(currentVideos);
-                        setVisible(false);
                     }, 300);
                 }, 1000);
                 setTimeId(id);
