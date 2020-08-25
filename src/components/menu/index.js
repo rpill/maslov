@@ -5,8 +5,6 @@ import styled from 'styled-components'
 import posed from "react-pose"
 import {Flex, Box} from 'rebass'
 import {space} from '../../styles/Theme'
-import {LayoutContext} from '../../layouts/layoutContext'
-import {TRANSITION_STATES} from '../../utils/constants'
 
 import debounce from 'lodash/debounce'
 
@@ -270,7 +268,6 @@ export const loadVideo = domElement =>
 export const loadVideos = (...domElements) => Promise.all(domElements.map(loadVideo));
 
 const Menu = () => {
-    const {dispatch} = useContext(LayoutContext);
     const location = useLocation();
     const [isMobile, setIsMobile] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
@@ -284,16 +281,6 @@ const Menu = () => {
     const handleResize = debounce(() => {
         setIsMobile(window.innerWidth < 1024);
     }, 300);
-
-    useEffect(() => {
-        const videos = refsVideos.flat();
-
-        loadVideos(...videos).then(videos => {
-            dispatch({type: 'transition.setState', transitionState: `started`, inTransition: false});
-        }).catch(e => {
-            console.log(e);
-        });
-    }, []);
 
     useEffect(() => {
         window.addEventListener('resize', handleResize);

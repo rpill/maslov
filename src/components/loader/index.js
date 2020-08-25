@@ -1,12 +1,10 @@
-import React, {useEffect, useRef, useState, useContext} from 'react'
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components'
 import posed from "react-pose"
-import {LayoutContext} from '../../layouts/layoutContext'
-import {TRANSITION_STATES} from '../../utils/constants'
 
-import {loadImages} from '../../utils/images-loader'
-import CanvasSpriteAnim from '../../utils/canvas-sprite-anim'
-import manData from '../../../static/assets/images/eye/eye.json'
+import { loadImages } from '../../utils/images-loader';
+import CanvasSpriteAnim from '../../utils/canvas-sprite-anim';
+import manData from '../../../static/assets/images/eye/eye.json';
 
 const LoaderPoses = posed.div({
     hidden: {
@@ -65,8 +63,6 @@ let spriteAnim;
 let loadedImages;
 
 const Loader = () => {
-    const {layoutState, dispatch} = useContext(LayoutContext);
-    const {transition} = layoutState;
     const [visible, setVisible] = useState(true);
     const [imgLoaded, setImgLoaded] = useState(false);
     const canvasRef = useRef(null);
@@ -85,18 +81,6 @@ const Loader = () => {
     }, []);
 
     useEffect(() => {
-        console.log(transition);
-        if (TRANSITION_STATES[transition.state] === TRANSITION_STATES['started'] && loadedImages && imgLoaded && canvasRef.current) {
-            delay(2500).then(() => {
-                setVisible(false);
-                delay(500).then(() => {
-                    spriteAnim.pause();
-                });
-            });
-        }
-    }, [transition, imgLoaded]);
-
-    useEffect(() => {
         if (loadedImages && imgLoaded && canvasRef.current) {
 
             const getImage = src => {
@@ -107,7 +91,7 @@ const Loader = () => {
                 return {
                     image: getImage(data.meta.image),
                     frames: filter ? filteredFrames(data.frames, filter) : data.frames,
-                    meta: {size: data.meta.size},
+                    meta: { size: data.meta.size },
                 };
             };
 
@@ -115,15 +99,15 @@ const Loader = () => {
                 baseWidth: manData.frames[0].sourceSize.w,
             });
 
-            spriteAnim.register({...getData(manData, '')});
+            spriteAnim.register({ ...getData(manData, '') });
             spriteAnim.start();
 
-            // delay(2500).then(() => {
-            //     setVisible(false);
-            //     delay(500).then(() => {
-            //         spriteAnim.pause();
-            //     });
-            // });
+            delay(3500).then(() => {
+                setVisible(false);
+                delay(500).then(() => {
+                    spriteAnim.pause();
+                });
+            });
         }
 
         return () => {
@@ -137,7 +121,7 @@ const Loader = () => {
 
     return (
         <LoaderStyle initialPose={'visible'} pose={visible ? 'visible' : 'hidden'} className={visible ? '' : 'hidden'}>
-            <LoaderCanvasStyle ref={canvasRef}/>
+                <LoaderCanvasStyle ref={canvasRef}/>
         </LoaderStyle>
     )
 }
