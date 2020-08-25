@@ -271,7 +271,9 @@ const Menu = () => {
             clearTimeout(timeId);
             setIsNavigate(false);
             setActiveIndex('');
-            setVisible(true);
+            setTimeout(function () {
+                setVisible(true);
+            }, 350);
         }
     }, [pathname]);
 
