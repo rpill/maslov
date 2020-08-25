@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import {Helmet} from "react-helmet"
 import {useStaticQuery, graphql} from "gatsby"
-import {useLocation} from '@reach/router'
 
 import image from '../../assets/images/og-image.jpg'
 
@@ -15,6 +14,7 @@ function SEO({description, lang, meta, title}) {
             title
             description
             author
+            siteUrl
             image
           }
         }
@@ -22,7 +22,6 @@ function SEO({description, lang, meta, title}) {
     `
     )
 
-    const location = useLocation();
     const metaDescription = description || site.siteMetadata.description
 
     return (
@@ -52,7 +51,7 @@ function SEO({description, lang, meta, title}) {
                 },
                 {
                     property: `og:image`,
-                    content: `${location.origin}${image}`,
+                    content: `${site.siteMetadata.siteUrl}${image}`,
                 },
                 {
                     name: `twitter:card`,
@@ -72,7 +71,7 @@ function SEO({description, lang, meta, title}) {
                 },
                 {
                     name: `twitter:image`,
-                    content: `${location.origin}${image}`,
+                    content: `${site.siteMetadata.siteUrl}${image}`,
                 },
             ].concat(meta)}
         />
