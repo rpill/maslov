@@ -4,6 +4,11 @@ import {Helmet} from "react-helmet"
 import {useStaticQuery, graphql} from "gatsby"
 
 import image from '../../assets/images/og-image.jpg'
+import allProjectMobileVideo from "../../assets/videos/all-projects-mobile.mp4";
+import typographyVideo from "../../assets/videos/typography.mp4";
+import logoDesignVideo from "../../assets/videos/logo-design.mp4";
+import illustrationsVideo from "../../assets/videos/illustrations.mp4";
+import aboutMobileVideo from "../../assets/videos/about-mobile.mp4";
 
 function SEO({description, lang, meta, title}) {
     const {site} = useStaticQuery(
@@ -74,6 +79,43 @@ function SEO({description, lang, meta, title}) {
                     content: `${site.siteMetadata.siteUrl}${image}`,
                 },
             ].concat(meta)}
+            link={[
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: allProjectMobileVideo
+                },
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: typographyVideo
+                },
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: logoDesignVideo
+                },
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: illustrationsVideo
+                },
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: aboutMobileVideo
+                },
+            ]}
         />
     )
 }
