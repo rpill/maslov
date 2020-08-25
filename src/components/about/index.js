@@ -36,7 +36,7 @@ const AboutStyle = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
-    height: 15vh;
+    height: 205px;
     background: linear-gradient(180deg, rgba(29, 28, 30, 0) 0%, ${props => props.theme.colors.jaguar} 100%);
     pointer-events: none;
     @media (max-width: ${props => props.theme.breakpoints[1]}px) {
