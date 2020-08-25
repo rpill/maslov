@@ -57,7 +57,7 @@ const VIDEOS_MOBILE = {
     'about': aboutMobileVideo,
 };
 
-const MenuPoses = posed.div({
+const HoverListPoses = posed.div({
     hidden: {
         opacity: 0,
         transition: {
@@ -91,7 +91,7 @@ const MenuListPoses = posed.ul({
     }
 })
 
-const MenuStyle = styled(MenuPoses)`
+const MenuStyle = styled.div`
     position: absolute;
     display: flex;
     align-items: center;
@@ -99,6 +99,7 @@ const MenuStyle = styled(MenuPoses)`
     width: 100%;
     top: 0;
     left: 0;
+    pointer-events: none;
     &.navigate {
       pointer-events: none;
     }
@@ -108,6 +109,7 @@ const MenuListStyle = styled(MenuListPoses)`
     list-style: none;
     margin: 0;
     padding: 0;
+    pointer-events: auto;
 `
 
 const MenuItemStyle = styled.li`
@@ -206,7 +208,7 @@ const HoverVideoStyle = styled.video`
   transform: translate(-50%, -50%);
 `
 
-const HoverListStyle = styled.div`
+const HoverListStyle = styled(HoverListPoses)`
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -296,7 +298,9 @@ const Menu = () => {
             clearTimeout(timeId);
             setIsNavigate(false);
             setActiveIndex('');
-            setVisible(true);
+            // setTimeout(function () {
+                setVisible(true);
+            // }, 100);
         }
     }, [pathname]);
 
@@ -363,8 +367,7 @@ const Menu = () => {
     };
 
     return (
-        <MenuStyle className={isNavigate ? 'navigate' : ''} initialPose={visible ? 'visible' : 'hidden'}
-                   pose={visible ? 'visible' : 'hidden'}>
+        <MenuStyle className={isNavigate ? 'navigate' : ''}>
             <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center" sx={{zIndex: 2}}>
                 <MenuListStyle initialPose={visible ? 'visible' : 'hidden'}
                                pose={visible ? 'visible' : 'hidden'}>
@@ -381,7 +384,8 @@ const Menu = () => {
                     ))}
                 </MenuListStyle>
             </Flex>
-            <Box as={HoverListStyle} className={isMobile ? 'mobile' : null}>
+            <HoverListStyle className={isMobile ? 'mobile' : null} initialPose={visible ? 'visible' : 'hidden'}
+                 pose={visible ? 'visible' : 'hidden'}>
                 {MENU_ITEMS.map((link, index) => (
                     <Box as={HoverItemStyle} key={index}
                          className={`${link.id}${activeIndex === index ? ' active' : ''}`}>
@@ -406,7 +410,7 @@ const Menu = () => {
                         }
                     </Box>
                 ))}
-            </Box>
+            </HoverListStyle>
         </MenuStyle>
     )
 }
