@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Link, navigate} from 'gatsby'
 import {useLocation} from '@reach/router'
 import styled from 'styled-components'
 import posed from "react-pose"
 import {Flex, Box} from 'rebass'
 import {space} from '../../styles/Theme'
+import {LayoutContext} from '../../layouts/layoutContext'
+import {TRANSITION_STATES} from '../../utils/constants'
 
 import debounce from 'lodash/debounce'
 
@@ -74,6 +76,23 @@ const MenuPoses = posed.div({
     }
 })
 
+const MenuListPoses = posed.ul({
+    hidden: {
+        opacity: 0,
+        transition: {
+            duration: 350,
+            ease: [.14, .99, .43, .99]
+        }
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            duration: 350,
+            ease: [.14, .99, .43, .99],
+        }
+    }
+})
+
 const MenuStyle = styled(MenuPoses)`
     position: absolute;
     display: flex;
@@ -87,7 +106,7 @@ const MenuStyle = styled(MenuPoses)`
     }
 `
 
-const MenuListStyle = styled.ul`
+const MenuListStyle = styled(MenuListPoses)`
     list-style: none;
     margin: 0;
     padding: 0;
@@ -242,7 +261,16 @@ const HoverListStyle = styled.div`
   }
 `
 
+export const loadVideo = domElement =>
+    new Promise((resolve, reject) => {
+        domElement.oncanplaythrough = () => resolve(domElement);
+        domElement.onerror = (error) => reject(error);
+    });
+
+export const loadVideos = (...domElements) => Promise.all(domElements.map(loadVideo));
+
 const Menu = () => {
+    const {dispatch} = useContext(LayoutContext);
     const location = useLocation();
     const [isMobile, setIsMobile] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
@@ -258,6 +286,16 @@ const Menu = () => {
     }, 300);
 
     useEffect(() => {
+        const videos = refsVideos.flat();
+
+        loadVideos(...videos).then(videos => {
+            dispatch({type: 'transition.setState', transitionState: `started`, inTransition: false});
+        }).catch(e => {
+            console.log(e);
+        });
+    }, []);
+
+    useEffect(() => {
         window.addEventListener('resize', handleResize);
         handleResize();
 
@@ -267,13 +305,11 @@ const Menu = () => {
     }, []);
 
     useEffect(() => {
-        if(pathname === '/') {
+        if (pathname === '/') {
             clearTimeout(timeId);
             setIsNavigate(false);
             setActiveIndex('');
-            setTimeout(function () {
-                setVisible(true);
-            }, 350);
+            setVisible(true);
         }
     }, [pathname]);
 
@@ -340,9 +376,11 @@ const Menu = () => {
     };
 
     return (
-        <MenuStyle className={isNavigate ? 'navigate' : ''} initialPose={visible ? 'visible' : 'hidden'} pose={visible ? 'visible' : 'hidden'}>
+        <MenuStyle className={isNavigate ? 'navigate' : ''} initialPose={visible ? 'visible' : 'hidden'}
+                   pose={visible ? 'visible' : 'hidden'}>
             <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center" sx={{zIndex: 2}}>
-                <Box as={MenuListStyle}>
+                <MenuListStyle initialPose={visible ? 'visible' : 'hidden'}
+                               pose={visible ? 'visible' : 'hidden'}>
                     {MENU_ITEMS.map((link, index) => (
                         <Box as={MenuItemStyle} key={index}>
                             <MenuLinkStyle
@@ -354,7 +392,7 @@ const Menu = () => {
                             </MenuLinkStyle>
                         </Box>
                     ))}
-                </Box>
+                </MenuListStyle>
             </Flex>
             <Box as={HoverListStyle} className={isMobile ? 'mobile' : null}>
                 {MENU_ITEMS.map((link, index) => (
@@ -373,7 +411,7 @@ const Menu = () => {
                             ?
                             <Box as={HoverVideoWrapStyle} className="mobile">
                                 <HoverVideoStyle preload="auto" loop muted playsInline
-                                       ref={element => refsVideos[index].push(element)}>
+                                                 ref={element => refsVideos[index].push(element)}>
                                     <source src={VIDEOS_MOBILE[link.id]} type="video/mp4"/>
                                 </HoverVideoStyle>
                             </Box>
