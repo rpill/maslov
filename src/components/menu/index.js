@@ -359,7 +359,7 @@ const Menu = () => {
                     <Box as={HoverItemStyle} key={index}
                          className={`${link.id}${activeIndex === index ? ' active' : ''}`}>
                         <Box as={HoverVideoWrapStyle} className="desktop">
-                            <HoverVideoStyle loop muted playsInline ref={element => {
+                            <HoverVideoStyle preload="auto" loop muted playsInline ref={element => {
                                 refsVideos[index] = [];
                                 refsVideos[index].push(element)
                             }}>
@@ -370,7 +370,7 @@ const Menu = () => {
                         {VIDEOS_MOBILE[link.id]
                             ?
                             <Box as={HoverVideoWrapStyle} className="mobile">
-                                <HoverVideoStyle loop muted playsInline
+                                <HoverVideoStyle preload="auto" loop muted playsInline
                                        ref={element => refsVideos[index].push(element)}>
                                     <source src={VIDEOS_MOBILE[link.id]} type="video/mp4"/>
                                 </HoverVideoStyle>
