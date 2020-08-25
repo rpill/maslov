@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Box } from 'rebass'
-import { space } from '../../styles/Theme'
+import {Flex, Box} from 'rebass'
+import {space} from '../../styles/Theme'
 
 import Back from '../back'
 import Social from "../social";
@@ -10,14 +10,15 @@ const FooterStyle = styled.footer`
   position: fixed;
   justify-content: center;
   z-index: 100;
-  padding: ${space[1]}px;
-  height: 100px;
+  padding: ${space[1] * 2}px ${space[1]}px;
   width: 100%;
   bottom: 0;
   left: 0;
+  @media (max-width: ${props => props.theme.breakpoints[4]}px) {
+    padding: ${space[1]}px;
+  }
   @media (max-width: ${props => props.theme.breakpoints[2]}px) {
     justify-content: space-between;
-    height: auto;
   }
 `
 

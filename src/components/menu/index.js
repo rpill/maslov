@@ -92,76 +92,78 @@ const MenuListPoses = posed.ul({
 })
 
 const MenuStyle = styled.div`
-    position: absolute;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  &.navigate {
     pointer-events: none;
-    &.navigate {
-      pointer-events: none;
-    }
+  }
 `
 
 const MenuListStyle = styled(MenuListPoses)`
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    pointer-events: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  pointer-events: auto;
 `
 
 const MenuItemStyle = styled.li`
-    overflow: hidden;
-    text-align: center;
+  overflow: hidden;
+  text-align: center;
 `
 
 const MenuLinkStyle = styled(props => <Link {...props} />)`
-    color: ${props => props.theme.colors.fuscousGrey};
-    font-family: ${props => props.theme.fonts.serif};
-    font-size: ${props => props.theme.fontSizes[8]}px;
+  color: ${props => props.theme.colors.fuscousGrey};
+  font-family: ${props => props.theme.fonts.serif};
+  font-size: ${props => props.theme.fontSizes[8]}px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  transition: all .5s;
+  @media (max-width: ${props => props.theme.breakpoints[4]}px) {
+    font-size: ${props => props.theme.fontSizes[6]}px;
+  }
+  @media (max-width: ${props => props.theme.breakpoints[2]}px) {
+    font-size: ${props => props.theme.fontSizes[7]}px;
+    line-height: 2.15;
+  }
+  @media (max-width: ${props => props.theme.breakpoints[0]}px) {
+    font-size: ${props => props.theme.fontSizes[4]}px;
+  }
+  @media (max-width: 374px) {
     line-height: 1.5;
-    text-transform: uppercase;
-    letter-spacing: .1rem;
-    transition: all .5s;
-    @media (max-width: ${props => props.theme.breakpoints[4]}px) {
-        font-size: ${props => props.theme.fontSizes[6]}px;
+    letter-spacing: 0;
+  }
+  &.all-projects {
+    &:hover, &.active {
+      color: ${props => props.theme.colors.white};
     }
-    @media (max-width: ${props => props.theme.breakpoints[2]}px) {
-        font-size: ${props => props.theme.fontSizes[7]}px;
+  }
+  &.typography {
+    &:hover, &.active {
+      color: ${props => props.theme.colors.red};
     }
-    @media (max-width: ${props => props.theme.breakpoints[0]}px) {
-        font-size: ${props => props.theme.fontSizes[4]}px;
+  }
+  &.logo-design {
+    &:hover, &.active {
+      color: ${props => props.theme.colors.green};
     }
-    @media (max-width: 374px) {
-        letter-spacing: 0;
+  }
+  &.illustrations {
+    &:hover, &.active {
+      color: ${props => props.theme.colors.blue};
     }
-    &.all-projects {
-      &:hover, &.active {
-        color: ${props => props.theme.colors.white};
-      }
+  }
+  &.about {
+    &:hover, &.active {
+      color: ${props => props.theme.colors.yellow};
     }
-    &.typography {
-      &:hover, &.active {
-        color: ${props => props.theme.colors.red};
-      }
-    }
-    &.logo-design {
-      &:hover, &.active {
-        color: ${props => props.theme.colors.green};
-      }
-    }
-    &.illustrations {
-      &:hover, &.active {
-        color: ${props => props.theme.colors.blue};
-      }
-    }
-    &.about {
-      &:hover, &.active {
-        color: ${props => props.theme.colors.yellow};
-      }
-    }
+  }
 `
 
 const HoverItemStyle = styled.div`
@@ -298,9 +300,7 @@ const Menu = () => {
             clearTimeout(timeId);
             setIsNavigate(false);
             setActiveIndex('');
-            // setTimeout(function () {
-                setVisible(true);
-            // }, 100);
+            setVisible(true);
         }
     }, [pathname]);
 
@@ -385,7 +385,7 @@ const Menu = () => {
                 </MenuListStyle>
             </Flex>
             <HoverListStyle className={isMobile ? 'mobile' : null} initialPose={visible ? 'visible' : 'hidden'}
-                 pose={visible ? 'visible' : 'hidden'}>
+                            pose={visible ? 'visible' : 'hidden'}>
                 {MENU_ITEMS.map((link, index) => (
                     <Box as={HoverItemStyle} key={index}
                          className={`${link.id}${activeIndex === index ? ' active' : ''}`}>

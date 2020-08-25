@@ -1,8 +1,8 @@
 module.exports = {
   assetPrefix: `/assets/`,
   siteMetadata: {
-    title: `Никита Маслов`,
-    description: `Иллюстратор`,
+    title: `Nikita Maslov`,
+    description: `Illustrator`,
     author: ``,
     social: [
       {

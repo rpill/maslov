@@ -20,7 +20,7 @@ export default function AllWorks( result ) {
 
     return (
         <>
-            <SEO title="All Projects"/>
+            <SEO title="Nikita Maslov"/>
             <WorksList works={nodes} />
         </>
     )

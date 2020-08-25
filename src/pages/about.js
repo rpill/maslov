@@ -18,7 +18,7 @@ const AboutPage = () => {
 
     return (
         <>
-            <SEO title="About"/>
+            <SEO title="Nikita Maslov"/>
             <About/>
         </>
     )

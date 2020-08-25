@@ -19,7 +19,7 @@ export default function Works(result) {
 
     return (
         <>
-            <SEO title={title}/>
+            <SEO title="Nikita Maslov"/>
             <WorksList works={works}/>
         </>
     )

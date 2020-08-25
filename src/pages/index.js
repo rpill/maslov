@@ -18,7 +18,7 @@ const IndexPage = () => {
 
     return (
         <>
-            <SEO title="Home"/>
+            <SEO title="Nikita Maslov"/>
         </>
     )
 }

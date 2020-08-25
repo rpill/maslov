@@ -13,7 +13,6 @@ import manData from '../../../static/assets/images/about/man.json';
 
 const AboutImagePoses = posed.div({
     hidden: {
-        y: 30,
         opacity: 0,
         transition: {
             duration: 1000,
@@ -21,7 +20,6 @@ const AboutImagePoses = posed.div({
         }
     },
     visible: {
-        y: 0,
         opacity: 1,
         delay: 200,
         transition: {
