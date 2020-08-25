@@ -144,6 +144,11 @@ const SocialItemStyle = styled(SocialItemPoses)`
       opacity: 1!important;
       transform: none!important;
     }
+    &:first-child {
+      @media (max-width: ${props => props.theme.breakpoints[2]}px) {
+        display: none;
+      }
+    }
     &:last-child {
       &:after {
         display: none;

@@ -4,6 +4,7 @@ module.exports = {
     title: `Nikita Maslov`,
     description: `Illustrator`,
     author: ``,
+    image: `src/assets/images/og-image.jpg`,
     social: [
       {
         name: `email`,
