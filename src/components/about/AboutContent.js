@@ -114,7 +114,7 @@ const AboutContent = () => {
 
     const handleResize = debounce(() => {
         const {innerHeight} = window;
-        maxY = innerHeight / 2;
+        maxY = innerHeight / 2 + 30;
     }, 350);
 
     useEffect(() => {
@@ -125,7 +125,7 @@ const AboutContent = () => {
         let isMounted = false;
 
         const {innerHeight} = window;
-        maxY = innerHeight / 2;
+        maxY = innerHeight / 2 + 30;
         setTimeout(() => {
             if(!isMounted) setTransformY(maxY);
         }, 50);
