@@ -306,7 +306,7 @@ const Menu = () => {
     }, [pathname]);
 
     const handleMouseEnter = (e, index) => {
-        if (isNavigate) return;
+        if (isNavigate || isMobile) return;
         setActiveIndex(index);
 
         playVideos(refsVideos[index]);
