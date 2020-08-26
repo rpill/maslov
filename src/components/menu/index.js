@@ -370,14 +370,16 @@ const Menu = () => {
     };
 
     const onPoseComplete = useCallback((poseName) => {
-        if(poseName === 'hidden' && pathname === '/') setVisibleMenuList(true);
+        if(poseName === 'visible' && pathname === '/') {
+            setVisibleMenuList(true);
+        }
     });
 
     return (
         <MenuStyle className={isNavigate ? 'navigate' : ''}>
             <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center" sx={{zIndex: 2}}>
                 <MenuListStyle initialPose={visibleMenuList ? 'visible' : 'hidden'}
-                               pose={visibleMenuList ? 'visible' : 'hidden'} onPoseComplete={onPoseComplete}>
+                               pose={visibleMenuList ? 'visible' : 'hidden'}>
                     {MENU_ITEMS.map((link, index) => (
                         <Box as={MenuItemStyle} key={index}>
                             <MenuLinkStyle
@@ -392,7 +394,7 @@ const Menu = () => {
                 </MenuListStyle>
             </Flex>
             <HoverListStyle className={isMobile ? 'mobile' : null} initialPose={visibleHoverList ? 'visible' : 'hidden'}
-                            pose={visibleHoverList ? 'visible' : 'hidden'}>
+                            pose={visibleHoverList ? 'visible' : 'hidden'} onPoseComplete={onPoseComplete}>
                 {MENU_ITEMS.map((link, index) => (
                     <Box as={HoverItemStyle} key={index}
                          className={`${link.id}${activeIndex === index ? ' active' : ''}`}>
