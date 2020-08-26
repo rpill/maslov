@@ -136,6 +136,11 @@ const Slider = ({images}) => {
         renderPrevButton: () => <ButtonStyle className="swiper-button-prev"><PrevIcon/></ButtonStyle>,
         renderNextButton: () => <ButtonStyle className="swiper-button-next"><NextIcon/></ButtonStyle>,
         breakpoints: {
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+                centeredSlides: false,
+            },
             992: {
                 slidesPerView: 3,
                 spaceBetween: 20,

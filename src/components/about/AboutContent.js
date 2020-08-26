@@ -46,13 +46,14 @@ const AboutContentStyle = styled.div`
 
 const AboutContentOverlayStyle = styled.div`
   position: absolute;
+  display: none;
   left: ${-space[1]}px;
   right: ${-space[1]}px;
   top: 50%;
   height: 160vh;
   margin-top: -80vh;
-  @media (min-width: ${props => props.theme.breakpoints[1] + 1}px) {
-    display: none;
+  @media (max-width: ${props => props.theme.breakpoints[1]}px) {
+    display: block;
   }
   &:after {
     content: '';
@@ -77,12 +78,12 @@ const AboutContentTextStyle = styled(AboutContentTextPoses)`
     font-size: ${props => props.theme.fontSizes[3]}px;
   }
   @media (max-width: ${props => props.theme.breakpoints[1]}px) {
-    font-size: 18px;
-    line-height: 1.5;
+    font-size: ${props => props.theme.fontSizes[4]}px;
     user-select: none;
   }
   @media (max-width: ${props => props.theme.breakpoints[0]}px) {
     font-size: ${props => props.theme.fontSizes[2]}px;
+    line-height: 1.5;
   }
   @media (max-width: 374px) {
     font-size: ${props => props.theme.fontSizes[1]}px;

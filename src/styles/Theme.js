@@ -18,9 +18,9 @@ export const colors = {
 // ]
 
 export const breakpoints = [
-    575,
-    767,
-    991,
+    576,
+    768,
+    992,
     1200,
     1366,
     1920

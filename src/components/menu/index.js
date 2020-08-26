@@ -1,10 +1,9 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import {Link, navigate} from 'gatsby'
 import {useLocation} from '@reach/router'
 import styled from 'styled-components'
 import posed from "react-pose"
 import {Flex, Box} from 'rebass'
-import {space} from '../../styles/Theme'
 
 import debounce from 'lodash/debounce'
 
@@ -57,23 +56,6 @@ const VIDEOS_MOBILE = {
     'about': aboutMobileVideo,
 };
 
-const HoverListPoses = posed.div({
-    hidden: {
-        opacity: 0,
-        transition: {
-            duration: 1000,
-            ease: [.14, .99, .43, .99]
-        }
-    },
-    visible: {
-        opacity: 1,
-        transition: {
-            duration: 1000,
-            ease: [.14, .99, .43, .99],
-        }
-    }
-})
-
 const MenuListPoses = posed.ul({
     hidden: {
         opacity: 0,
@@ -86,6 +68,23 @@ const MenuListPoses = posed.ul({
         opacity: 1,
         transition: {
             duration: 350,
+            ease: [.14, .99, .43, .99],
+        }
+    }
+})
+
+const HoverListPoses = posed.div({
+    hidden: {
+        opacity: 0,
+        transition: {
+            duration: 1000,
+            ease: [.14, .99, .43, .99]
+        }
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            duration: 1000,
             ease: [.14, .99, .43, .99],
         }
     }
@@ -276,7 +275,8 @@ const Menu = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
     const [isNavigate, setIsNavigate] = useState(null);
-    const [visible, setVisible] = useState(false);
+    const [visibleMenuList, setVisibleMenuList] = useState(false);
+    const [visibleHoverList, setVisibleHoverList] = useState(false);
     const [timeId, setTimeId] = useState(null);
     let currentVideos = null;
     let refsVideos = [];
@@ -300,7 +300,8 @@ const Menu = () => {
             clearTimeout(timeId);
             setIsNavigate(false);
             setActiveIndex('');
-            setVisible(true);
+            setVisibleMenuList(true);
+            setVisibleHoverList(true);
         }
     }, [pathname]);
 
@@ -331,10 +332,11 @@ const Menu = () => {
             currentVideos = refsVideos[index];
             delay(1000).then(() => {
                 navigate(url);
+                setVisibleMenuList(false);
                 let id = setTimeout(function () {
                     setIsNavigate(false);
                     setActiveIndex('');
-                    setVisible(false);
+                    setVisibleHoverList(false);
 
                     setTimeout(function () {
                         stopVideos(currentVideos);
@@ -347,7 +349,8 @@ const Menu = () => {
             let id = setTimeout(function () {
                 setIsNavigate(false);
                 setActiveIndex('');
-                setVisible(false);
+                setVisibleMenuList(false);
+                setVisibleHoverList(false);
             }, 1000);
             setTimeId(id);
         }
@@ -366,11 +369,15 @@ const Menu = () => {
         });
     };
 
+    const onPoseComplete = useCallback((poseName) => {
+        if(poseName === 'hidden' && pathname === '/') setVisibleMenuList(true);
+    });
+
     return (
         <MenuStyle className={isNavigate ? 'navigate' : ''}>
             <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center" sx={{zIndex: 2}}>
-                <MenuListStyle initialPose={visible ? 'visible' : 'hidden'}
-                               pose={visible ? 'visible' : 'hidden'}>
+                <MenuListStyle initialPose={visibleMenuList ? 'visible' : 'hidden'}
+                               pose={visibleMenuList ? 'visible' : 'hidden'} onPoseComplete={onPoseComplete}>
                     {MENU_ITEMS.map((link, index) => (
                         <Box as={MenuItemStyle} key={index}>
                             <MenuLinkStyle
@@ -384,8 +391,8 @@ const Menu = () => {
                     ))}
                 </MenuListStyle>
             </Flex>
-            <HoverListStyle className={isMobile ? 'mobile' : null} initialPose={visible ? 'visible' : 'hidden'}
-                            pose={visible ? 'visible' : 'hidden'}>
+            <HoverListStyle className={isMobile ? 'mobile' : null} initialPose={visibleHoverList ? 'visible' : 'hidden'}
+                            pose={visibleHoverList ? 'visible' : 'hidden'}>
                 {MENU_ITEMS.map((link, index) => (
                     <Box as={HoverItemStyle} key={index}
                          className={`${link.id}${activeIndex === index ? ' active' : ''}`}>
