@@ -79,43 +79,43 @@ function SEO({description, lang, meta, title}) {
                     content: `${site.siteMetadata.siteUrl}${image}`,
                 },
             ].concat(meta)}
-            // link={[
-            //     {
-            //         rel: `preload`,
-            //         media: `all`,
-            //         as: `video`,
-            //         type: `video/mp4`,
-            //         href: allProjectMobileVideo
-            //     },
-            //     {
-            //         rel: `preload`,
-            //         media: `all`,
-            //         as: `video`,
-            //         type: `video/mp4`,
-            //         href: typographyVideo
-            //     },
-            //     {
-            //         rel: `preload`,
-            //         media: `all`,
-            //         as: `video`,
-            //         type: `video/mp4`,
-            //         href: logoDesignVideo
-            //     },
-            //     {
-            //         rel: `preload`,
-            //         media: `all`,
-            //         as: `video`,
-            //         type: `video/mp4`,
-            //         href: illustrationsVideo
-            //     },
-            //     {
-            //         rel: `preload`,
-            //         media: `all`,
-            //         as: `video`,
-            //         type: `video/mp4`,
-            //         href: aboutMobileVideo
-            //     },
-            // ]}
+            link={[
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: allProjectMobileVideo
+                },
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: typographyVideo
+                },
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: logoDesignVideo
+                },
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: illustrationsVideo
+                },
+                {
+                    rel: `preload`,
+                    media: `all`,
+                    as: `video`,
+                    type: `video/mp4`,
+                    href: aboutMobileVideo
+                },
+            ]}
         />
     )
 }
