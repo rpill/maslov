@@ -357,16 +357,16 @@ const Menu = () => {
     };
 
     const playVideos = (videos) => {
-        videos.map((video) => {
-            video.play()
-        });
+        // videos.map((video) => {
+        //     video.play()
+        // });
     };
 
     const stopVideos = (videos) => {
-        videos.map((video) => {
-            video.pause();
-            video.currentTime = 0;
-        });
+        // videos.map((video) => {
+        //     video.pause();
+        //     video.currentTime = 0;
+        // });
     };
 
     const onPoseComplete = useCallback((poseName) => {
@@ -393,7 +393,7 @@ const Menu = () => {
                     ))}
                 </MenuListStyle>
             </Flex>
-            <HoverListStyle className={isMobile ? 'mobile' : null} initialPose={visibleHoverList ? 'visible' : 'hidden'}
+            {/*<HoverListStyle className={isMobile ? 'mobile' : null} initialPose={visibleHoverList ? 'visible' : 'hidden'}
                             pose={visibleHoverList ? 'visible' : 'hidden'} onPoseComplete={onPoseComplete}>
                 {MENU_ITEMS.map((link, index) => (
                     <Box as={HoverItemStyle} key={index}
@@ -419,7 +419,7 @@ const Menu = () => {
                         }
                     </Box>
                 ))}
-            </HoverListStyle>
+            </HoverListStyle>*/}
         </MenuStyle>
     )
 }
