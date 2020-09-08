@@ -175,7 +175,7 @@ const HoverItemStyle = styled.div`
   left: 0;
   background-color: ${props => props.theme.colors.jaguar};
   opacity: 0;
-  //transition: opacity .5s cubic-bezier(.215, .61, .355, 1);
+  transition: opacity .5s cubic-bezier(.215, .61, .355, 1);
   &.active {
     z-index: 5;
     opacity: 1;
@@ -358,7 +358,7 @@ const Menu = () => {
 
     const playVideos = (videos) => {
         videos.forEach((video) => {
-            video.play()
+            video.play();
         });
     };
 
