@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
     }
     * {
         outline: none !important;
+        -webkit-tap-highlight-color: transparent;
     }
     button {
         padding: 0;
