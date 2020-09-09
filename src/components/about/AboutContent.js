@@ -91,7 +91,7 @@ const AboutContentTextStyle = styled(AboutContentTextPoses)`
 `
 
 const AboutContent = () => {
-    const [ visible, setVisible ] = useState(false);
+    const [visible, setVisible] = useState(false);
     const [transformY, setTransformY] = useState(0);
     const [opacity, setOpacity] = useState(0);
 
@@ -110,7 +110,7 @@ const AboutContent = () => {
     };
     let stylesOverlay = {
         opacity: opacity,
-        transform: `translateY(${transformY-10}px)`
+        transform: `translateY(${transformY - 10}px)`
     };
 
     const handleResize = debounce(() => {
@@ -128,7 +128,7 @@ const AboutContent = () => {
         const {innerHeight} = window;
         maxY = innerHeight / 2 + 30;
         setTimeout(() => {
-            if(!isMounted) setTransformY(maxY);
+            if (!isMounted) setTransformY(maxY);
         }, 50);
 
         handleResize();
@@ -188,16 +188,10 @@ const AboutContent = () => {
         <Box as={AboutContentStyle} ref={content} style={stylesContent}>
             <AboutContentOverlayStyle style={stylesOverlay}>{''}</AboutContentOverlayStyle>
             <AboutContentTextStyle initialPose={'hidden'} pose={visible ? 'visible' : 'hidden'}>
-                Hi! I&rsquo;m Nikita Maslov, I&nbsp;specialize in&nbsp;
-                <nobr>hand-crafted</nobr>
-                and web illustration, logotype and
-                typography design. Currently working as&nbsp;a&nbsp;
-                <nobr>full-time</nobr>
-                freelancer. I&rsquo;m focused
-                on&nbsp;creating
-                original and conceptual solutions for brands, editorial designs, covers, various print and
-                visual
-                communications
+                Hi! I&rsquo;m Nikita Maslov, I&nbsp;specialize in&nbsp;<span style={{whiteSpace: "nowrap"}}>hand-crafted</span> and web illustration,
+                logotype and typography design. Currently working as&nbsp;a&nbsp;<span style={{whiteSpace: "nowrap"}}>full-time</span> freelancer.
+                I&rsquo;m focused on&nbsp;creating original and conceptual solutions for brands, editorial designs,
+                covers, various print and visual communications
             </AboutContentTextStyle>
         </Box>
     )
