@@ -200,13 +200,11 @@ const HoverVideoWrapStyle = styled.div`
 
 const HoverVideoStyle = styled.video`
   position: absolute;
-  width: auto;
-  height: auto;
-  min-height: 100%;
-  min-width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: cover;
 `
 
 const HoverListStyle = styled(HoverListPoses)`
@@ -219,6 +217,16 @@ const HoverListStyle = styled(HoverListPoses)`
   pointer-events: none;
   &.mobile {
     ${HoverItemStyle} {
+      ${HoverVideoStyle} {
+        width: auto;
+        height: auto;
+        min-height: 100%;
+        min-width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: fill;
+      }
       &.all-projects {
         ${HoverVideoStyle} {
           height: 130vh;
