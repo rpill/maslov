@@ -9,23 +9,23 @@ module.exports = {
     social: [
       {
         name: `email`,
-        url: `mailto:mymail@mail.com`
+        url: `idleheaddsgn@gmail.com`
       },
       {
         name: `facebook`,
-        url: `https://facebook.com`
+        url: `https://www.facebook.com/nikitamslv`
       },
       {
         name: `instagram`,
-        url: `https://instagram.com`
+        url: `http://instagram.com/idlehead`
       },
       {
         name: `dribbble`,
-        url: `https://dribbble.com`
+        url: `https://dribbble.com/nikitamaslov`
       },
       {
         name: `behance`,
-        url: `https://behance.com`
+        url: `https://www.behance.net/nikitamaslov`
       }
     ],
   },
