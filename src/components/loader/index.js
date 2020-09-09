@@ -96,14 +96,14 @@ const Loader = () => {
             };
 
             spriteAnim = new CanvasSpriteAnim(canvasRef.current, {
-                frameRate: 16,
+                frameRate: 13,
                 baseWidth: manData.frames[0].sourceSize.w,
             });
 
             spriteAnim.register({ ...getData(manData, '') });
             spriteAnim.start();
 
-            delay(4000).then(() => {
+            delay(5000).then(() => {
                 setVisible(false);
                 delay(500).then(() => {
                     spriteAnim.pause();
