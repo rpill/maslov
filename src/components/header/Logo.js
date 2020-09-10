@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from "react"
-import { Link } from "gatsby"
+import {Link} from "gatsby"
 import styled from 'styled-components'
 import posed from 'react-pose'
-import { Box } from 'rebass'
+import {Box} from 'rebass'
 
-import { LayoutContext } from '../../layouts/layoutContext'
+import {LayoutContext} from '../../layouts/layoutContext'
 
 import LogoIcon from '../../svg/LogoIcon';
 import {useLocation} from "@reach/router";
@@ -51,7 +51,11 @@ const LogoStyle = styled(props => <Link {...props} />)`
 const LogoIconStyle = styled.div`
   svg {
     transition: all .3s;
-    @media (max-width: ${props => props.theme.breakpoints[0]}px) {
+    @media (min-width: ${props => props.theme.breakpoints[2] + 1}px) and (max-width: ${props => props.theme.breakpoints[5]}px) {
+      width: 59px;
+      height: 32px;
+    }
+    @media (max-width: ${props => props.theme.breakpoints[1]}px) {
       width: 59px;
       height: 32px;
     }
@@ -96,7 +100,11 @@ const LogoTitleStyle = styled.div`
   letter-spacing: .04rem;
   white-space: nowrap;
   //transition: all .3s;
-  @media (max-width: ${props => props.theme.breakpoints[2]}px) {
+  @media (min-width: ${props => props.theme.breakpoints[2] + 1}px) and (max-width: ${props => props.theme.breakpoints[5]}px) {
+    transform: translateX(3px) translateY(2px) rotate(-13deg);
+    font-size: ${props => props.theme.fontSizes[0]}px;
+  }
+  @media (max-width: ${props => props.theme.breakpoints[1]}px) {
     transform: translateX(3px) translateY(2px) rotate(-13deg);
     font-size: ${props => props.theme.fontSizes[0]}px;
   }
@@ -104,10 +112,10 @@ const LogoTitleStyle = styled.div`
 
 const Logo = () => {
     const location = useLocation();
-    const { layoutState } = useContext(LayoutContext);
+    const {layoutState} = useContext(LayoutContext);
     const [visible, setVisible] = useState(false);
-    const { pageOptions } = layoutState;
-    const { title, color } = pageOptions;
+    const {pageOptions} = layoutState;
+    const {title, color} = pageOptions;
     const pathname = location.pathname;
 
     useEffect(() => {
