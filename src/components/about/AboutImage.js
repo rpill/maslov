@@ -74,7 +74,7 @@ const AboutImageCanvasStyle = styled.canvas`
   bottom: 30.3vw;
   width: 19.469vw;
   height: 18.74vw;
-  @media (min-width: ${props => props.theme.breakpoints[5]+1}px) and (max-height: 1250px) {
+  @media (min-width: ${props => props.theme.breakpoints[6]+1}px) and (max-height: 1250px) {
 
   }
   @media (max-width: ${props => props.theme.breakpoints[3]}px) {

@@ -42,7 +42,7 @@ const LoaderStyle = styled(LoaderPoses)`
 const LoaderCanvasStyle = styled.canvas`
   width: 346px;
   height: 346px;
-  @media (max-width: ${props => props.theme.breakpoints[5]}px) {
+  @media (max-width: ${props => props.theme.breakpoints[6]}px) {
     width: 252px;
     height: 252px;
   }

@@ -23,6 +23,7 @@ export const breakpoints = [
     992,
     1200,
     1366,
+    1600,
     1920
 ]
 

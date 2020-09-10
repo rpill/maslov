@@ -67,6 +67,7 @@ const ButtonStyle = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 10;
+  padding: 10px 15px;
   top: 50%;
   margin-top: -31px!important;
   width: 62px!important;
@@ -75,6 +76,10 @@ const ButtonStyle = styled.div`
   border-radius: 50%;
   cursor: pointer;
   transition: all .3s;
+  @media (max-width: ${props => props.theme.breakpoints[5]}px) {
+    width: 46px!important;
+    height: 46px!important;
+  }
   @media (max-width: ${props => props.theme.breakpoints[2]}px) {
     display: none!important;
   }
@@ -87,14 +92,14 @@ const ButtonStyle = styled.div`
   &:before, &:after {
     display: none;
   }
-  .swiper-button-prev {
-    left: ${space[1] * 2}px;
+  &.swiper-button-prev {
+    left: ${space[1] * 2}px!important;
     svg {
       transform: translateX(-2px);
     }
   }
-  .swiper-button-next {
-    right: ${space[1] * 2}px;
+  &.swiper-button-next {
+    right: ${space[1] * 2}px!important;
     svg {
       transform: translateX(2px);
     }
