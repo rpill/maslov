@@ -9,7 +9,7 @@ module.exports = {
     social: [
       {
         name: `email`,
-        url: `idleheaddsgn@gmail.com`
+        url: `mailto:idleheaddsgn@gmail.com`
       },
       {
         name: `facebook`,
@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         name: `instagram`,
-        url: `http://instagram.com/idlehead`
+        url: `https://instagram.com/idlehead`
       },
       {
         name: `dribbble`,
@@ -74,8 +74,8 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: `wjubrff7rdix`, // or process.env.CONTENTFUL_SPACE_ID
-        accessToken: `ab1OBF34rPmwBkOlpBsdJfgWpX2x7WJzTWQwW7agtFA`, // or process.env.CONTENTFUL_TOKEN
+        spaceId: `mj1vhtt89p21`, // or process.env.CONTENTFUL_SPACE_ID
+        accessToken: `EtvAxwXp3MTGNTzCJzruMgnwilED10b35V5atANd_Qk`, // or process.env.CONTENTFUL_TOKEN
       },
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality
