@@ -176,6 +176,7 @@ const HoverItemStyle = styled.div`
   background-color: ${props => props.theme.colors.jaguar};
   opacity: 0;
   transition: opacity .5s cubic-bezier(.215, .61, .355, 1);
+  will-change: opacity;
   &.active {
     z-index: 5;
     opacity: 1;
@@ -191,7 +192,6 @@ const HoverVideoWrapStyle = styled.div`
   top: 0;
   left: 0;
   background-color: ${props => props.theme.colors.jaguar};
-  transform: translateZ(0);
   &.mobile {
     z-index: 2;
     display: none;
