@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react'
-import {graphql} from 'gatsby'
+import {navigate, graphql} from 'gatsby'
 import WorksList from '../components/works';
 
 import SEO from "../components/seo";
@@ -20,7 +20,7 @@ export default function Works(result) {
     return (
         <>
             <SEO title="Nikita Maslov"/>
-            <WorksList works={works}/>
+            {works ? <WorksList works={works}/> : ''}
         </>
     )
 }
