@@ -6,6 +6,7 @@ import posed from "react-pose"
 import {Flex, Box} from 'rebass'
 
 import debounce from 'lodash/debounce'
+import videojs from 'video.js'
 
 import allProjectVideo from "../../assets/videos/all-projects.mp4";
 import allProjectMobileVideo from "../../assets/videos/all-projects-mobile.mp4";
@@ -176,7 +177,6 @@ const HoverItemStyle = styled.div`
   background-color: ${props => props.theme.colors.jaguar};
   opacity: 0;
   transition: opacity .5s cubic-bezier(.215, .61, .355, 1);
-  will-change: opacity;
   &.active {
     z-index: 5;
     opacity: 1;
@@ -192,6 +192,7 @@ const HoverVideoWrapStyle = styled.div`
   top: 0;
   left: 0;
   background-color: ${props => props.theme.colors.jaguar};
+  transform: translateZ(0);
   &.mobile {
     z-index: 2;
     display: none;
@@ -204,7 +205,14 @@ const HoverVideoStyle = styled.video`
   height: 100%;
   left: 0;
   top: 0;
-  object-fit: cover;
+  video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+  }
 `
 
 const HoverListStyle = styled(HoverListPoses)`
@@ -218,45 +226,57 @@ const HoverListStyle = styled(HoverListPoses)`
   &.mobile {
     ${HoverItemStyle} {
       ${HoverVideoStyle} {
-        width: auto;
-        height: auto;
-        min-height: 100%;
-        min-width: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        object-fit: fill;
+        video {
+          width: auto;
+          height: auto;
+          min-height: 100%;
+          min-width: 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          object-fit: fill;
+        }
       }
       &.all-projects {
         ${HoverVideoStyle} {
-          height: 130vh;
-          @media (max-width: ${props => props.theme.breakpoints[1]}px) {
-            height: 115vh;
+          video {
+            height: 130vh;
+            @media (max-width: ${props => props.theme.breakpoints[1]}px) {
+              height: 115vh;
+            }
           }
         }
       }
       &.typography {
         ${HoverVideoStyle} {
-          height: 100vh;
+          video {
+            height: 100vh;
+          }
         }
       }
       &.logo-design {
         ${HoverVideoStyle} {
-          height: 70vh;
-          min-height: auto;
-          @media (max-width: ${props => props.theme.breakpoints[1]}px) {
-            height: 60vh;
+          video {
+            height: 70vh;
+            min-height: auto;
+            @media (max-width: ${props => props.theme.breakpoints[1]}px) {
+              height: 60vh;
+            }
           }
         }
       }
       &.illustrations {
         ${HoverVideoStyle} {
-          height: 100vh;
+          video {
+            height: 100vh;
+          }
         }
       }
       &.about {
         ${HoverVideoStyle} {
-          height: 130vh;
+          video {
+            height: 130vh;
+          }
         }
       }
     }
@@ -270,14 +290,6 @@ const HoverListStyle = styled(HoverListPoses)`
   }
 `
 
-export const loadVideo = domElement =>
-    new Promise((resolve, reject) => {
-        domElement.oncanplaythrough = () => resolve(domElement);
-        domElement.onerror = (error) => reject(error);
-    });
-
-export const loadVideos = (...domElements) => Promise.all(domElements.map(loadVideo));
-
 const Menu = () => {
     const location = useLocation();
     const [isMobile, setIsMobile] = useState(false);
@@ -286,9 +298,33 @@ const Menu = () => {
     const [visibleMenuList, setVisibleMenuList] = useState(false);
     const [visibleHoverList, setVisibleHoverList] = useState(false);
     const [timeId, setTimeId] = useState(null);
+    const [videos, setVideos] = useState([]);
     let currentVideos = null;
     let refsVideos = [];
     const pathname = location.pathname;
+    const options = {
+        html5: {
+            hls: {
+                overrideNative: !videojs.browser.IS_SAFARI,
+            },
+        },
+        controls: false,
+        muted: true,
+        preload: 'auto',
+        loop: true,
+        controlBar: {
+            playToggle: false,
+            captionsButton: false,
+            chaptersButton: false,
+            subtitlesButton: false,
+            remainingTimeDisplay: false,
+            progressControl: {
+                seekBar: true
+            },
+            fullscreenToggle: false,
+            playbackRateMenuButton: false,
+        }
+    };
 
     const handleResize = debounce(() => {
         setIsMobile(window.innerWidth < 1024);
@@ -297,6 +333,19 @@ const Menu = () => {
     useEffect(() => {
         window.addEventListener('resize', handleResize);
         handleResize();
+
+        let arrVideos = [];
+
+        refsVideos.forEach((element, index) => {
+            arrVideos.push([]);
+            element.forEach(video => {
+                arrVideos[index].push(videojs(video, options, function onPlayerReady() {
+                    console.log('onPlayerReady', this);
+                }))
+            });
+        })
+
+        setVideos(arrVideos);
 
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -317,7 +366,7 @@ const Menu = () => {
         if (isNavigate || isMobile) return;
         setActiveIndex(index);
 
-        playVideos(refsVideos[index]);
+        playVideos(videos[index]);
     };
 
     const handleMouseLeave = (e, index) => {
@@ -334,10 +383,10 @@ const Menu = () => {
         setIsNavigate(true);
         setActiveIndex(index);
 
-        playVideos(refsVideos[index]);
+        playVideos(videos[index]);
 
         if (isMobile) {
-            currentVideos = refsVideos[index];
+            currentVideos = videos[index];
             delay(1000).then(() => {
                 navigate(url);
                 setVisibleMenuList(false);
@@ -373,7 +422,7 @@ const Menu = () => {
     const stopVideos = (videos) => {
         videos.forEach((video) => {
             video.pause();
-            video.currentTime = 0;
+            video.currentTime(0);
         });
     };
 

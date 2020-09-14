@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react'
-import {navigate, graphql} from 'gatsby'
+import {graphql} from 'gatsby'
 import WorksList from '../components/works';
 
 import SEO from "../components/seo";
