@@ -44,7 +44,7 @@ module.exports = {
       options: {
         name: `assets`,
         path: `${__dirname}/src/assets/`,
-        ignore: ['**/*.mp4', '**/*.m4v']
+        ignore: ['**/*.mp4']
       },
     },
     `gatsby-transformer-sharp`,
