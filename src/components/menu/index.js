@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react'
+import ReactPlayer from 'react-player'
 import {Link, navigate} from 'gatsby'
 import {useLocation} from '@reach/router'
 import styled from 'styled-components'
@@ -198,13 +199,27 @@ const HoverVideoWrapStyle = styled.div`
   }
 `
 
-const HoverVideoStyle = styled.video`
+const HoverVideoStyle = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
-  object-fit: cover;
+  & > div {
+    position: absolute;
+    width: 100%!important;
+    height: 100%!important;
+    left: 0;
+    top: 0;
+  }
+  video {
+    position: absolute;
+    width: 100%!important;
+    height: 100%!important;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+  }
 `
 
 const HoverListStyle = styled(HoverListPoses)`
@@ -218,45 +233,57 @@ const HoverListStyle = styled(HoverListPoses)`
   &.mobile {
     ${HoverItemStyle} {
       ${HoverVideoStyle} {
-        width: auto;
-        height: auto;
-        min-height: 100%;
-        min-width: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        object-fit: fill;
+        video {
+          width: auto!important;
+          height: auto!important;
+          min-height: 100%;
+          min-width: 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          object-fit: fill;
+        }
       }
       &.all-projects {
         ${HoverVideoStyle} {
-          height: 130vh;
-          @media (max-width: ${props => props.theme.breakpoints[1]}px) {
-            height: 115vh;
+          video {
+            height: 130vh!important;
+            @media (max-width: ${props => props.theme.breakpoints[1]}px) {
+              height: 115vh!important;
+            }
           }
         }
       }
       &.typography {
         ${HoverVideoStyle} {
-          height: 100vh;
+          video {
+            height: 100vh!important;
+          }
         }
       }
       &.logo-design {
         ${HoverVideoStyle} {
-          height: 70vh;
-          min-height: auto;
-          @media (max-width: ${props => props.theme.breakpoints[1]}px) {
-            height: 60vh;
+          video {
+            height: 70vh!important;
+            min-height: auto;
+            @media (max-width: ${props => props.theme.breakpoints[1]}px) {
+              height: 60vh!important;
+            }
           }
         }
       }
       &.illustrations {
         ${HoverVideoStyle} {
-          height: 100vh;
+          video {
+            height: 100vh!important;
+          }
         }
       }
       &.about {
         ${HoverVideoStyle} {
-          height: 130vh;
+          video {
+            height: 130vh!important;
+          }
         }
       }
     }
@@ -278,6 +305,7 @@ const Menu = () => {
     const [visibleMenuList, setVisibleMenuList] = useState(false);
     const [visibleHoverList, setVisibleHoverList] = useState(false);
     const [timeId, setTimeId] = useState(null);
+    const [playing, setPlaying] = useState(false);
     let currentVideos = null;
     let refsVideos = [];
     const pathname = location.pathname;
@@ -358,14 +386,14 @@ const Menu = () => {
 
     const playVideos = (videos) => {
         videos.forEach((video) => {
-            video.play();
+            setPlaying(true);
         });
     };
 
     const stopVideos = (videos) => {
         videos.forEach((video) => {
-            video.pause();
-            video.currentTime = 0;
+            setPlaying(false);
+            video.seekTo(0);
         });
     };
 
@@ -399,20 +427,50 @@ const Menu = () => {
                     <Box as={HoverItemStyle} key={index}
                          className={`${link.id}${activeIndex === index ? ' active' : ''}`}>
                         <Box as={HoverVideoWrapStyle} className="desktop">
-                            <HoverVideoStyle preload="auto" loop muted playsInline ref={element => {
+                            {/*<HoverVideoStyle preload="auto" loop muted playsInline ref={element => {
                                 refsVideos[index] = [];
                                 refsVideos[index].push(element)
                             }}>
                                 <source src={VIDEOS_DESKTOP[link.id]} type="video/mp4"/>
+                            </HoverVideoStyle>*/}
+                            <HoverVideoStyle>
+                                <ReactPlayer
+                                    ref={element => {
+                                        refsVideos[index] = [];
+                                        refsVideos[index].push(element)
+                                    }}
+                                    playing={playing}
+                                    loop
+                                    muted
+                                    playsInline
+                                    controls={false}
+                                    url={[
+                                        {src: VIDEOS_DESKTOP[link.id], type: 'video/mp4'},
+                                    ]}
+                                />
                             </HoverVideoStyle>
+
                         </Box>
 
                         {VIDEOS_MOBILE[link.id]
                             ?
                             <Box as={HoverVideoWrapStyle} className="mobile">
-                                <HoverVideoStyle preload="auto" loop muted playsInline
+                                <HoverVideoStyle>
+                                    {/*<HoverVideoStyle preload="auto" loop muted playsInline
                                                  ref={element => refsVideos[index].push(element)}>
-                                    <source src={VIDEOS_MOBILE[link.id]} type="video/mp4"/>
+                                        <source src={VIDEOS_MOBILE[link.id]} type="video/mp4"/>
+                                    </HoverVideoStyle>*/}
+                                    <ReactPlayer
+                                        ref={element => refsVideos[index].push(element)}
+                                        playing={playing}
+                                        loop
+                                        muted
+                                        playsInline
+                                        controls={false}
+                                        url={[
+                                            {src: VIDEOS_MOBILE[link.id], type: 'video/mp4'},
+                                        ]}
+                                    />
                                 </HoverVideoStyle>
                             </Box>
                             : ''
