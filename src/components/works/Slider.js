@@ -125,6 +125,7 @@ const Slider = ({images}) => {
         slidesPerView: 1,
         spaceBetween: 10,
         centeredSlides: true,
+        mousewheel: true,
         pagination: {
             el: '.swiper-pagination',
             type: 'fraction',
