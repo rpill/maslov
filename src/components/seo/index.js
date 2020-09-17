@@ -37,48 +37,6 @@ function SEO({description, lang, meta, title}) {
             title={title}
             // titleTemplate={`%s | ${site.siteMetadata.title}`}
             titleTemplate={`${site.siteMetadata.title}`}
-            meta={[
-                {
-                    name: `description`,
-                    content: metaDescription,
-                },
-                {
-                    property: `og:title`,
-                    content: title,
-                },
-                {
-                    property: `og:description`,
-                    content: metaDescription,
-                },
-                {
-                    property: `og:type`,
-                    content: `website`,
-                },
-                {
-                    property: `og:image`,
-                    content: `${site.siteMetadata.siteUrl}${image}`,
-                },
-                {
-                    name: `twitter:card`,
-                    content: `summary`,
-                },
-                {
-                    name: `twitter:creator`,
-                    content: site.siteMetadata.author,
-                },
-                {
-                    name: `twitter:title`,
-                    content: title,
-                },
-                {
-                    name: `twitter:description`,
-                    content: metaDescription,
-                },
-                {
-                    name: `twitter:image`,
-                    content: `${site.siteMetadata.siteUrl}${image}`,
-                },
-            ].concat(meta)}
             link={[
                 {
                     rel: `preload`,
@@ -116,7 +74,18 @@ function SEO({description, lang, meta, title}) {
                     href: aboutMobileVideo
                 },
             ]}
-        />
+        >
+            <meta name="description" content={metaDescription} />
+            <meta property="og:title" content={title}/>
+            <meta property="og:description" content={metaDescription}/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:image" content={`${site.siteMetadata.siteUrl}${image}`}/>
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:creator" content={site.siteMetadata.author} />
+            <meta name="twitter:title" content={title} />
+            <meta name="twitter:description" content={metaDescription} />
+            <meta property="twitter:image" content={`${site.siteMetadata.siteUrl}${image}`}/>
+        </Helmet>
     )
 }
 
