@@ -4,7 +4,7 @@ module.exports = {
     title: `Nikita Maslov`,
     description: `Illustrator`,
     author: ``,
-    siteUrl: `https://vibrant-easley-5f5f51.netlify.app`,
+    siteUrl: `https://nikitamslv.com/`,
     image: `src/assets/images/og-image.jpg`,
     social: [
       {
