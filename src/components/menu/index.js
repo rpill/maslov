@@ -289,6 +289,7 @@ const Menu = () => {
     useEffect(() => {
         window.addEventListener('resize', handleResize);
         handleResize();
+        videoPreload();
 
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -304,6 +305,19 @@ const Menu = () => {
             setVisibleHoverList(true);
         }
     }, [pathname]);
+
+    const videoPreload = () => {
+        refsVideos.forEach(elements => {
+            elements.forEach(video => {
+                const source = video.querySelector('source');
+                const url = source.getAttribute('src');
+                fetch(url).then(response => {
+                    source.src = url;
+                    video.load();
+                })
+            })
+        })
+    };
 
     const handleMouseEnter = (e, index) => {
         if (isNavigate || isMobile) return;
