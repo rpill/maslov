@@ -2,7 +2,7 @@ module.exports = {
   assetPrefix: `/assets/`,
   siteMetadata: {
     title: `Nikita Maslov`,
-    description: `Illustrator`,
+    description: `Graphic Designer & Illustrator, focused on creating original and conceptual works`,
     author: ``,
     siteUrl: `https://nikitamslv.com/`,
     image: `src/assets/images/og-image.jpg`,
