@@ -1,9 +1,10 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useContext, useState, useEffect, useCallback} from 'react'
 import {Link, navigate} from 'gatsby'
 import {useLocation} from '@reach/router'
 import styled from 'styled-components'
 import posed from "react-pose"
 import {Flex, Box} from 'rebass'
+import { LayoutContext } from '../../layouts/layoutContext'
 
 import debounce from 'lodash/debounce'
 
@@ -278,6 +279,7 @@ const Menu = () => {
     const [visibleMenuList, setVisibleMenuList] = useState(false);
     const [visibleHoverList, setVisibleHoverList] = useState(false);
     const [timeId, setTimeId] = useState(null);
+    const { dispatch } = useContext(LayoutContext);
     let currentVideos = null;
     let refsVideos = [];
     const pathname = location.pathname;
@@ -307,13 +309,23 @@ const Menu = () => {
     }, [pathname]);
 
     const videoPreload = () => {
+        let count = 0;
+        let loadedCount = 0;
         refsVideos.forEach(elements => {
             elements.forEach(video => {
                 const source = video.querySelector('source');
                 const url = source.getAttribute('src');
+                count++;
                 fetch(url).then(response => {
+                    loadedCount++;
                     source.src = url;
                     video.load();
+                    if(loadedCount === count) {
+                        dispatch({
+                            type: 'videoLoaded',
+                            videoLoaded: true,
+                        })
+                    }
                 })
             })
         })

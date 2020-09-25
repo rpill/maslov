@@ -1,6 +1,7 @@
 import {createContext} from 'react'
 
 export const defaultContextValue = {
+    videoLoaded: false,
     pageOptions: {
         title: '',
         color: '#fff'
@@ -14,6 +15,11 @@ export const defaultContextValue = {
 
 export const reducer = (state, action) => {
     switch (action.type) {
+        case 'videoLoaded':
+            return {
+                ...state,
+                videoLoaded: action.videoLoaded
+            }
         case 'setPageOptions':
             return {
                 ...state,

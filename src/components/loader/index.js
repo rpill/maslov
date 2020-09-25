@@ -1,6 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components'
 import posed from "react-pose"
+import {LayoutContext} from "../../layouts/layoutContext";
 
 import { loadImages } from '../../utils/images-loader';
 import CanvasSpriteAnim from '../../utils/canvas-sprite-anim';
@@ -66,6 +67,8 @@ const Loader = () => {
     const [visible, setVisible] = useState(true);
     const [imgLoaded, setImgLoaded] = useState(false);
     const canvasRef = useRef(null);
+    const {layoutState} = useContext(LayoutContext);
+    const {videoLoaded} = layoutState;
 
     const delay = t => new Promise(resolve => setTimeout(resolve, t));
 
@@ -81,7 +84,7 @@ const Loader = () => {
     }, []);
 
     useEffect(() => {
-        if (loadedImages && imgLoaded && canvasRef.current) {
+        if (loadedImages && imgLoaded && canvasRef.current && videoLoaded) {
 
             const getImage = src => {
                 return loadedImages.find(img => img.src.indexOf(src) > -1);
@@ -118,7 +121,7 @@ const Loader = () => {
             }
         };
 
-    }, [imgLoaded]);
+    }, [imgLoaded, videoLoaded]);
 
     return (
         <LoaderStyle initialPose={'visible'} pose={visible ? 'visible' : 'hidden'} className={visible ? '' : 'hidden'}>
