@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import posed from "react-pose"
 import {LayoutContext} from "../../layouts/layoutContext";
 
-import { loadImages } from '../../utils/images-loader';
+import {loadImages} from '../../utils/images-loader';
 import CanvasSpriteAnim from '../../utils/canvas-sprite-anim';
 import manData from '../../../static/assets/images/eye/eye.json';
+import imageEye from '../../assets/images/eye.png';
 
 const LoaderPoses = posed.div({
     hidden: {
@@ -37,6 +38,24 @@ const LoaderStyle = styled(LoaderPoses)`
   background-color: ${props => props.theme.colors.jaguar};
   &.hidden {
     pointer-events: none;
+  }
+`
+
+const LoaderImageStyle = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 346px;
+  transition: opacity .3s;
+  @media (max-width: ${props => props.theme.breakpoints[6]}px) {
+    width: 252px;
+  }
+  @media (max-width: ${props => props.theme.breakpoints[4]}px) {
+    width: 168px;
+  }
+  @media (max-width: ${props => props.theme.breakpoints[1]}px) {
+    width: 180px;
   }
 `
 
@@ -94,7 +113,7 @@ const Loader = () => {
                 return {
                     image: getImage(data.meta.image),
                     frames: filter ? filteredFrames(data.frames, filter) : data.frames,
-                    meta: { size: data.meta.size },
+                    meta: {size: data.meta.size},
                 };
             };
 
@@ -103,7 +122,7 @@ const Loader = () => {
                 baseWidth: manData.frames[0].sourceSize.w,
             });
 
-            spriteAnim.register({ ...getData(manData, '') });
+            spriteAnim.register({...getData(manData, '')});
             spriteAnim.start();
 
             delay(5000).then(() => {
@@ -125,7 +144,8 @@ const Loader = () => {
 
     return (
         <LoaderStyle initialPose={'visible'} pose={visible ? 'visible' : 'hidden'} className={visible ? '' : 'hidden'}>
-                <LoaderCanvasStyle ref={canvasRef}/>
+            <LoaderImageStyle src={imageEye} style={{opacity: imgLoaded ? 0 : 1}}/>
+            <LoaderCanvasStyle ref={canvasRef} />
         </LoaderStyle>
     )
 }
