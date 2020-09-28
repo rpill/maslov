@@ -429,7 +429,7 @@ const Menu = () => {
                                 refsVideos[index] = [];
                                 refsVideos[index].push(element)
                             }}>
-                                <source src={VIDEOS_DESKTOP[link.id]} type="video/mp4"/>
+                                <source key={index} src={VIDEOS_DESKTOP[link.id]} type="video/mp4"/>
                             </HoverVideoStyle>
                         </Box>
 
@@ -438,7 +438,7 @@ const Menu = () => {
                             <Box as={HoverVideoWrapStyle} className="mobile">
                                 <HoverVideoStyle preload="auto" loop muted playsInline
                                                  ref={element => refsVideos[index].push(element)}>
-                                    <source src={VIDEOS_MOBILE[link.id]} type="video/mp4"/>
+                                    <source key={index + 100} src={VIDEOS_MOBILE[link.id]} type="video/mp4"/>
                                 </HoverVideoStyle>
                             </Box>
                             : ''
