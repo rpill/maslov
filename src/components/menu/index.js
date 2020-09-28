@@ -425,20 +425,20 @@ const Menu = () => {
                     <Box as={HoverItemStyle} key={index}
                          className={`${link.id}${activeIndex === index ? ' active' : ''}`}>
                         <Box as={HoverVideoWrapStyle} className="desktop">
-                            <HoverVideoStyle preload="auto" loop muted playsInline ref={element => {
+                            <HoverVideoStyle key={VIDEOS_DESKTOP[link.id]} preload="auto" loop muted playsInline ref={element => {
                                 refsVideos[index] = [];
                                 refsVideos[index].push(element)
                             }}>
-                                <source key={index} src={VIDEOS_DESKTOP[link.id]} type="video/mp4"/>
+                                <source key={VIDEOS_DESKTOP[link.id]} src={VIDEOS_DESKTOP[link.id]} type="video/mp4"/>
                             </HoverVideoStyle>
                         </Box>
 
                         {VIDEOS_MOBILE[link.id]
                             ?
                             <Box as={HoverVideoWrapStyle} className="mobile">
-                                <HoverVideoStyle preload="auto" loop muted playsInline
+                                <HoverVideoStyle key={VIDEOS_MOBILE[link.id]} preload="auto" loop muted playsInline
                                                  ref={element => refsVideos[index].push(element)}>
-                                    <source key={index + 100} src={VIDEOS_MOBILE[link.id]} type="video/mp4"/>
+                                    <source key={VIDEOS_MOBILE[link.id]} src={VIDEOS_MOBILE[link.id]} type="video/mp4"/>
                                 </HoverVideoStyle>
                             </Box>
                             : ''

@@ -78,7 +78,8 @@ module.exports = {
         spaceId: `mj1vhtt89p21`, // or process.env.CONTENTFUL_SPACE_ID
         accessToken: `EtvAxwXp3MTGNTzCJzruMgnwilED10b35V5atANd_Qk`, // or process.env.CONTENTFUL_TOKEN
       },
-    }
+    },
+    'gatsby-plugin-no-sourcemaps'
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
   ],
